@@ -1,14 +1,14 @@
-namespace TaskManager.Api.Entities;
-
 using TaskManager.Api.Common;
 
-public class Task
+namespace TaskManager.Api.Entities;
+
+public class TaskItem
 {
-    public int? Id { get; set; }
+    public int Id { get; set; }
     public required string Title { get; set; }
     public required string Description { get; set; }
 
-    public TaskStatus Status { get; set; } = TaskStatus.Pending;
+    public Common.TaskStatus Status { get; set; } = Common.TaskStatus.Pending;
     public TaskPriority Priority { get; set; } = TaskPriority.Medium;
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
