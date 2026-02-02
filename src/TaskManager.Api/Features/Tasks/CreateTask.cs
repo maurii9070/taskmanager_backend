@@ -17,7 +17,13 @@ public static class CreateTask
 
     public record Response(
         int Id,
-        string Title
+        string Title,
+        string Description,
+        string Status,
+        string Priority,
+        DateTime DueDate,
+        int CategoryId,
+        DateTime CreatedAt
     );
 
     public class Handler
@@ -44,23 +50,12 @@ public static class CreateTask
                 throw new ArgumentException("La fecha de vencimiento no puede ser en el pasado.");
             }
 
-            var taskItem = new TaskItem
-            {
-                Title = request.Title,
-                Description = request.Description,
-                Priority = priority,
-                DueDate = request.DueDate,
-                CategoryId = request.CategoryId,
-                CreatedAt = DateTime.UtcNow
-            };
+            var taskItem = request.ToTaskItem(priority);
 
             _db.Tasks.Add(taskItem);
             await _db.SaveChangesAsync();
 
-            return new Response(
-                taskItem.Id,
-                taskItem.Title
-            );
+            return taskItem.ToCreateResponse();
         }
     }
 
