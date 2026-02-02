@@ -17,6 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddScoped<CreateTask.Handler>();
+builder.Services.AddScoped<GetAllTasks.Handler>();
 
 // DI services
 

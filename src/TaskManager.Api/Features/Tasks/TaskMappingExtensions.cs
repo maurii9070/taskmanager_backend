@@ -31,4 +31,19 @@ public static class TaskMappingExtensions
             task.CreatedAt
         );
     }
+
+    public static GetAllTasks.Response ToGetAllResponse(this TaskItem task)
+    {
+        return new GetAllTasks.Response(
+            task.Id,
+            task.Title,
+            task.Description,
+            task.Status.ToString(),
+            task.Priority.ToString(),
+            task.DueDate,
+            task.CategoryId,
+            task.Category?.Name ?? "Sin categoría",
+            task.CreatedAt
+        );
+    }
 }
