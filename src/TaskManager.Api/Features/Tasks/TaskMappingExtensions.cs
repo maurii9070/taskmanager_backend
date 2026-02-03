@@ -46,4 +46,47 @@ public static class TaskMappingExtensions
             task.CreatedAt
         );
     }
+
+    public static void UpdateFromRequest(
+        this TaskItem task,
+        UpdateTask.Request request,
+        Common.TaskStatus status,
+        TaskPriority priority)
+    {
+        task.Title = request.Title;
+        task.Description = request.Description;
+        task.Status = status;
+        task.Priority = priority;
+        task.DueDate = request.DueDate;
+        task.CategoryId = request.CategoryId;
+    }
+
+    public static UpdateTask.Response ToUpdateResponse(this TaskItem task)
+    {
+        return new UpdateTask.Response(
+            task.Id,
+            task.Title,
+            task.Description,
+            task.Status.ToString(),
+            task.Priority.ToString(),
+            task.DueDate,
+            task.CategoryId,
+            task.CreatedAt
+        );
+    }
+
+    public static GetTaskById.Response ToGetByIdResponse(this TaskItem task)
+    {
+        return new GetTaskById.Response(
+            task.Id,
+            task.Title,
+            task.Description,
+            task.Status.ToString(),
+            task.Priority.ToString(),
+            task.DueDate,
+            task.CategoryId,
+            task.Category?.Name ?? "Sin categoría",
+            task.CreatedAt
+        );
+    }
 }

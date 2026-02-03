@@ -6,5 +6,8 @@ public static class EndpointExtensions
     {
         Features.Tasks.CreateTask.MapEndpoint(app);
         Features.Tasks.GetAllTasks.MapEndpoint(app);
+        Features.Tasks.GetTaskById.MapEndpoint(app);
+        Features.Tasks.UpdateTask.MapEndpoint(app);
+        Features.Tasks.DeleteTask.MapEndpoint(app);
     }
 }
