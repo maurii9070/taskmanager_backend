@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TaskManager.Api.Database;
 using TaskManager.Api.Extensions;
 using TaskManager.Api.Features.Tasks;
+using TaskManager.Api.Features.Categories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,10 @@ builder.Services.AddScoped<UpdateTask.Handler>();
 builder.Services.AddScoped<UpdateTaskStatus.Handler>();
 builder.Services.AddScoped<DeleteTask.Handler>();
 
+builder.Services.AddScoped<CreateCategory.Handler>();
+builder.Services.AddScoped<GetAllCategories.Handler>();
+builder.Services.AddScoped<GetCategoryById.Handler>();
+
 // DI services
 
 var app = builder.Build();
@@ -32,6 +37,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+app.MapCategoryEndpoints();
 
 app.UseHttpsRedirection();
 

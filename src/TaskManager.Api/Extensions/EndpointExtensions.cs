@@ -11,4 +11,11 @@ public static class EndpointExtensions
         Features.Tasks.UpdateTaskStatus.MapEndpoint(app);
         Features.Tasks.DeleteTask.MapEndpoint(app);
     }
+
+    public static void MapCategoryEndpoints(this IEndpointRouteBuilder app)
+    {
+        Features.Categories.CreateCategory.MapEndpoint(app);
+        Features.Categories.GetAllCategories.MapEndpoint(app);
+        Features.Categories.GetCategoryById.MapEndpoint(app);
+    }
 }
