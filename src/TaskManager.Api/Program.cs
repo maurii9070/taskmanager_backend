@@ -20,6 +20,7 @@ builder.Services.AddScoped<CreateTask.Handler>();
 builder.Services.AddScoped<GetAllTasks.Handler>();
 builder.Services.AddScoped<GetTaskById.Handler>();
 builder.Services.AddScoped<UpdateTask.Handler>();
+builder.Services.AddScoped<UpdateTaskStatus.Handler>();
 builder.Services.AddScoped<DeleteTask.Handler>();
 
 // DI services
