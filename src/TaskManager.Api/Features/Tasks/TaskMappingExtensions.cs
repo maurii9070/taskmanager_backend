@@ -89,4 +89,14 @@ public static class TaskMappingExtensions
             task.CreatedAt
         );
     }
+
+    public static UpdateTaskStatus.Response ToUpdateStatusResponse(this TaskItem task)
+    {
+        return new UpdateTaskStatus.Response(
+            task.Id,
+            task.Title,
+            task.Status.ToString(),
+            task.CreatedAt
+        );
+    }
 }
