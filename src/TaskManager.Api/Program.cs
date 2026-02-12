@@ -17,6 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connection).UseSnakeCaseNamingConvention();
 });
 
+// DI services
 builder.Services.AddScoped<CreateTask.Handler>();
 builder.Services.AddScoped<GetAllTasks.Handler>();
 builder.Services.AddScoped<GetTaskById.Handler>();
@@ -28,7 +29,21 @@ builder.Services.AddScoped<CreateCategory.Handler>();
 builder.Services.AddScoped<GetAllCategories.Handler>();
 builder.Services.AddScoped<GetCategoryById.Handler>();
 
-// DI services
+
+// CORS
+var frontendUrl = builder.Configuration.GetValue<string>("CorsSettings:FrontendUrl");
+const string frontendPolicy = "FrontendPolicy";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: frontendPolicy,
+        policy =>
+        {
+            policy.WithOrigins(frontendUrl!) // URL del frontend
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
 
@@ -37,11 +52,13 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-app.MapCategoryEndpoints();
+
+app.UseCors(frontendPolicy);
 
 app.UseHttpsRedirection();
 
 app.MapTaskEndpoints();
+app.MapCategoryEndpoints();
 
 app.Run();
 

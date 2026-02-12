@@ -1,26 +1,26 @@
-@TaskManager.Api_HostAddress = http://localhost:5004
+@base_url = http://localhost:5004/api
 
-POST http://localhost:5004/api/tasks
+POST {{base_url}}/tasks
 Content-Type: application/json
 
 {
     "title": "Nueva Tarea",
     "description": "Descripción de la nueva tarea",
     "priority": "High",
-    "dueDate": "2026-02-02T23:59:59Z",
+    "dueDate": "2026-02-10T23:59:59Z",
     "categoryId": 1
 }
 
 ###
 
-GET http://localhost:5004/api/tasks
+GET {{base_url}}/tasks
 
 ###
 
-GET http://localhost:5004/api/tasks/1
+GET {{base_url}}/tasks/6
 
 ###
-PUT http://localhost:5004/api/tasks/1
+PUT {{base_url}}/tasks/2
 Content-Type: application/json
 
 {
@@ -33,4 +33,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:5004/api/tasks/1
+DELETE {{base_url}}/tasks/1
